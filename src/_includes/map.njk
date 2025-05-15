@@ -2093,11 +2093,11 @@ THE SOFTWARE.
 </svg>
 
 <div class="flex">
-  <div class="legend" style="background-color: var(--apple)"></div>
+  <div class="legend" style="background-color: hsl(223, 50%, 50%)"></div>
   <p class="label">Apple</p>
 </div>
 <div class="flex">
-  <div class="legend" style="background-color: var(--android)"></div>
+  <div class="legend" style="background-color: hsl(147, 50%, 50%)"></div>
   <p class="label">Android</p>
 </div>
 <style>
@@ -2116,7 +2116,7 @@ THE SOFTWARE.
   }
   {% for entry in marketShare %}
     #map path[name="{{ entry.country }}"] {
-      color: var(--{{ entry | winner }});
+      color: hsl({{ entry | winner }}, {{ entry | weighting }}%, 50%);
     }
   {% endfor %}
 
