@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "npx @11ty/eleventy --serve --input=src --output=dist",
+    "build": "npx @11ty/eleventy --pathprefix=dist",
+    "serve": "npx @11ty/eleventy --serve",
     "dataset": "node scripts/generate-dataset.js"
   },
   "keywords": [],
