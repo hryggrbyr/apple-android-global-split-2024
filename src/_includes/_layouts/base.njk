@@ -8,8 +8,9 @@
   </head>
   <body data-style="winner">
     <header>
-      <a href="/"><strong>CX Technology</strong> - Data Maps</a>
+      <a href="{{ '/' | url }}"><strong>CX Technology</strong> - Data Maps</a>
     </header>
+    {% include 'nav.njk' %}
     <main class="flow">
       <h1>{{ title | safe }}</h1>
       {{ content | safe }}
