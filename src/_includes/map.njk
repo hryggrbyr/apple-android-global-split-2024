@@ -2131,6 +2131,9 @@ THE SOFTWARE.
   #map path {
     color: canvasText;
   }
+  #map path:hover {
+    color: hsl(50, 80%, 60%) !important;
+  }
 
   {% for entry in marketShare %}
     [data-style="winner"] #map path[name="{{ entry.country }}"] {
@@ -2162,3 +2165,35 @@ THE SOFTWARE.
     border-radius: 100%;
   }
 </style>
+
+<div id="tooltip"></div>
+
+<script type="text/javascript">
+  const data = {
+    {% for entry in marketShare %}
+      "{{ entry.country }}": {
+        iphone: {{ entry.iphone }},
+        android: {{ entry.android }}
+      },
+    {% endfor %}
+  }
+  console.log(data)
+  const paths = [...document.querySelectorAll('#map path')]
+  const tooltip = document.querySelector('#tooltip')
+  const content = x => `
+    <p><strong>${x.getAttribute('name')}</strong></p>
+    <div>
+    <p style="display: flex; gap: 1ch; justify-content: space-between;"><span>Apple</span> <span>${data[x.getAttribute('name')].iphone}%</span></p>
+    <p style="display: flex; gap: 1ch; justify-content: space-between;"><span>Android</span> <span>${data[x.getAttribute('name')].android}%</span></p>
+    </div>
+  `
+  const handleHover = evt => {
+    const { target } = evt;
+    tooltip.innerHTML = content(target)
+    tooltip.style = `display: block; top: ${evt.clientY}px; left: ${evt.clientX}px`
+    target.addEventListener('mouseout', () => { tooltip.style = 'display: none;' }, { once: true });
+  }
+  paths.forEach(path => {
+    path.addEventListener('mouseover', handleHover)
+  })
+</script>

@@ -1376,7 +1376,7 @@ module.exports = [
   {
     flagCode: "EH",
     country: "Western Sahara",
-    iphone: null,
+    iphone: 0,
     android: 100
   }
 ].sort((a, b) => a.country.localeCompare(b.country));

@@ -255,6 +255,17 @@ tr th {
   display: flex !important;
 }
 
+#tooltip {
+  display: none;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  border: 1px solid canvasText;
+  background-color: canvas;
+  padding: 1ch 2ch;
+  width: fit-content;
+  overflow-wrap: normal;
+  user-select: none !important;
+}
 </style>
   </head>
   <body data-style="winner">
@@ -2413,6 +2424,9 @@ THE SOFTWARE.
   }
   #map path {
     color: canvasText;
+  }
+  #map path:hover {
+    color: hsl(50, 80%, 60%) !important;
   }
 
   
@@ -4736,6 +4750,1182 @@ THE SOFTWARE.
   }
 </style>
 
+<div id="tooltip"></div>
+
+<script type="text/javascript">
+  const data = {
+    
+      "Afghanistan": {
+        iphone: 10.71,
+        android: 89.23
+      },
+    
+      "Albania": {
+        iphone: 67.28,
+        android: 32.46
+      },
+    
+      "Algeria": {
+        iphone: 10.46,
+        android: 89.38
+      },
+    
+      "American Samoa": {
+        iphone: 97.96,
+        android: 2.04
+      },
+    
+      "Andorra": {
+        iphone: 64.27,
+        android: 35.21
+      },
+    
+      "Angola": {
+        iphone: 15.52,
+        android: 82.75
+      },
+    
+      "Anguilla": {
+        iphone: 77.69,
+        android: 22.12
+      },
+    
+      "Antigua and Barbuda": {
+        iphone: 35.76,
+        android: 63.09
+      },
+    
+      "Argentina": {
+        iphone: 13.44,
+        android: 86.34
+      },
+    
+      "Armenia": {
+        iphone: 35.73,
+        android: 64.04
+      },
+    
+      "Aruba": {
+        iphone: 48.04,
+        android: 51.73
+      },
+    
+      "Australia": {
+        iphone: 56.68,
+        android: 42.54
+      },
+    
+      "Austria": {
+        iphone: 46.97,
+        android: 52.15
+      },
+    
+      "Azerbaijan": {
+        iphone: 16.31,
+        android: 83.04
+      },
+    
+      "Bahamas": {
+        iphone: 91.44,
+        android: 8.51
+      },
+    
+      "Bahrain": {
+        iphone: 33.08,
+        android: 66.64
+      },
+    
+      "Bangladesh": {
+        iphone: 4.57,
+        android: 95.23
+      },
+    
+      "Barbados": {
+        iphone: 30.12,
+        android: 69.12
+      },
+    
+      "Belarus": {
+        iphone: 39.77,
+        android: 60.04
+      },
+    
+      "Belgium": {
+        iphone: 44.88,
+        android: 54.49
+      },
+    
+      "Belize": {
+        iphone: 65.87,
+        android: 34.01
+      },
+    
+      "Benin": {
+        iphone: 17.79,
+        android: 80.25
+      },
+    
+      "Bermuda": {
+        iphone: 99.66,
+        android: 0.34
+      },
+    
+      "Bhutan": {
+        iphone: 13.9,
+        android: 86.02
+      },
+    
+      "Bolivia": {
+        iphone: 10.52,
+        android: 89.09
+      },
+    
+      "Bosnia and Herzegovina": {
+        iphone: 21.07,
+        android: 77.5
+      },
+    
+      "Botswana": {
+        iphone: 9.99,
+        android: 89.6
+      },
+    
+      "Brazil": {
+        iphone: 14.75,
+        android: 85.09
+      },
+    
+      "British Virgin Islands": {
+        iphone: 43.18,
+        android: 56.65
+      },
+    
+      "Brunei Darussalam": {
+        iphone: 32.13,
+        android: 66.79
+      },
+    
+      "Bulgaria": {
+        iphone: 17.87,
+        android: 81.97
+      },
+    
+      "Burkina Faso": {
+        iphone: 15.85,
+        android: 83.65
+      },
+    
+      "Burundi": {
+        iphone: 10.06,
+        android: 88.4
+      },
+    
+      "Cambodia": {
+        iphone: 40.11,
+        android: 59.6
+      },
+    
+      "Cameroon": {
+        iphone: 19.46,
+        android: 79.74
+      },
+    
+      "Canada": {
+        iphone: 60.38,
+        android: 39.17
+      },
+    
+      "Cape Verde": {
+        iphone: 19.22,
+        android: 80.58
+      },
+    
+      "Cayman Islands": {
+        iphone: 54.01,
+        android: 45.72
+      },
+    
+      "Central African Republic": {
+        iphone: 4.48,
+        android: 91.1
+      },
+    
+      "Chad": {
+        iphone: 5.68,
+        android: 94.25
+      },
+    
+      "Chile": {
+        iphone: 28.1,
+        android: 71.54
+      },
+    
+      "China": {
+        iphone: 24.13,
+        android: 75.47
+      },
+    
+      "Colombia": {
+        iphone: 31.02,
+        android: 68.78
+      },
+    
+      "Comoros": {
+        iphone: 15.73,
+        android: 84.26
+      },
+    
+      "Cook Islands": {
+        iphone: 42.06,
+        android: 57.84
+      },
+    
+      "Costa Rica": {
+        iphone: 34.48,
+        android: 65.18
+      },
+    
+      "Côte d&#39;Ivoire": {
+        iphone: 36.9,
+        android: 62.95
+      },
+    
+      "Croatia": {
+        iphone: 24.1,
+        android: 74.92
+      },
+    
+      "Cuba": {
+        iphone: 8.49,
+        android: 91.41
+      },
+    
+      "Cyprus": {
+        iphone: 31.34,
+        android: 67.81
+      },
+    
+      "Czechia": {
+        iphone: 29.2,
+        android: 70.24
+      },
+    
+      "Dem. Rep. Korea": {
+        iphone: 66.23,
+        android: 33.77
+      },
+    
+      "Democratic Republic of the Congo": {
+        iphone: 13.65,
+        android: 85.21
+      },
+    
+      "Denmark": {
+        iphone: 68.96,
+        android: 30.71
+      },
+    
+      "Djibouti": {
+        iphone: 9.42,
+        android: 90.46
+      },
+    
+      "Dominica": {
+        iphone: 21.39,
+        android: 77.58
+      },
+    
+      "Dominican Republic": {
+        iphone: 66.02,
+        android: 33.86
+      },
+    
+      "Ecuador": {
+        iphone: 26,
+        android: 73.82
+      },
+    
+      "Egypt": {
+        iphone: 13.85,
+        android: 85.82
+      },
+    
+      "El Salvador": {
+        iphone: 25.8,
+        android: 74
+      },
+    
+      "Equatorial Guinea": {
+        iphone: 22.99,
+        android: 73.03
+      },
+    
+      "Eritrea": {
+        iphone: 4.59,
+        android: 95.41
+      },
+    
+      "Estonia": {
+        iphone: 39.19,
+        android: 60.16
+      },
+    
+      "Ethiopia": {
+        iphone: 3.23,
+        android: 96.11
+      },
+    
+      "Falkland Islands": {
+        iphone: 30.86,
+        android: 69.08
+      },
+    
+      "Faroe Islands": {
+        iphone: 81.68,
+        android: 17.94
+      },
+    
+      "Fiji": {
+        iphone: 15.86,
+        android: 83.86
+      },
+    
+      "Finland": {
+        iphone: 32.96,
+        android: 66.71
+      },
+    
+      "France": {
+        iphone: 28.67,
+        android: 70.91
+      },
+    
+      "French Guiana": {
+        iphone: 34.94,
+        android: 64.51
+      },
+    
+      "French Polynesia": {
+        iphone: 53.17,
+        android: 46.72
+      },
+    
+      "Gabon": {
+        iphone: 32.24,
+        android: 67.51
+      },
+    
+      "Georgia": {
+        iphone: 23.77,
+        android: 74.12
+      },
+    
+      "Germany": {
+        iphone: 37.01,
+        android: 62.18
+      },
+    
+      "Ghana": {
+        iphone: 18.59,
+        android: 80.12
+      },
+    
+      "Gibraltar": {
+        iphone: 52.17,
+        android: 47.3
+      },
+    
+      "Greece": {
+        iphone: 24.78,
+        android: 74.19
+      },
+    
+      "Greenland": {
+        iphone: 47.31,
+        android: 51.35
+      },
+    
+      "Grenada": {
+        iphone: 32.87,
+        android: 66.59
+      },
+    
+      "Guadeloupe": {
+        iphone: 36.68,
+        android: 62.46
+      },
+    
+      "Guam": {
+        iphone: 58.75,
+        android: 40.69
+      },
+    
+      "Guatemala": {
+        iphone: 26.47,
+        android: 73.36
+      },
+    
+      "Guernsey": {
+        iphone: 70.04,
+        android: 29.85
+      },
+    
+      "Guinea": {
+        iphone: 14.97,
+        android: 84.75
+      },
+    
+      "Guinea-Bissau": {
+        iphone: 11.71,
+        android: 87.76
+      },
+    
+      "Guyana": {
+        iphone: 20.82,
+        android: 78.92
+      },
+    
+      "Haiti": {
+        iphone: 13.49,
+        android: 86.46
+      },
+    
+      "Honduras": {
+        iphone: 50.75,
+        android: 48.99
+      },
+    
+      "Hong Kong": {
+        iphone: 44.32,
+        android: 52.3
+      },
+    
+      "Hungary": {
+        iphone: 17.66,
+        android: 81.88
+      },
+    
+      "Iceland": {
+        iphone: 62.48,
+        android: 37.15
+      },
+    
+      "India": {
+        iphone: 4.04,
+        android: 95.62
+      },
+    
+      "Indonesia": {
+        iphone: 12.91,
+        android: 87
+      },
+    
+      "Iran": {
+        iphone: 8.82,
+        android: 91.04
+      },
+    
+      "Iraq": {
+        iphone: 15.57,
+        android: 84.36
+      },
+    
+      "Ireland": {
+        iphone: 41.03,
+        android: 58.67
+      },
+    
+      "Isle of Man": {
+        iphone: 60.47,
+        android: 39.15
+      },
+    
+      "Israel": {
+        iphone: 24.67,
+        android: 74.94
+      },
+    
+      "Italy": {
+        iphone: 31.42,
+        android: 68.15
+      },
+    
+      "Jamaica": {
+        iphone: 39.65,
+        android: 59.55
+      },
+    
+      "Japan": {
+        iphone: 59.18,
+        android: 40.59
+      },
+    
+      "Jersey": {
+        iphone: 67.53,
+        android: 31.65
+      },
+    
+      "Jordan": {
+        iphone: 19.94,
+        android: 79.82
+      },
+    
+      "Kazakhstan": {
+        iphone: 37.94,
+        android: 61.71
+      },
+    
+      "Kenya": {
+        iphone: 4.2,
+        android: 90.83
+      },
+    
+      "Kiribati": {
+        iphone: 1.91,
+        android: 98.09
+      },
+    
+      "Kuwait": {
+        iphone: 41.45,
+        android: 58.34
+      },
+    
+      "Lao PDR": {
+        iphone: 26.58,
+        android: 73.15
+      },
+    
+      "Latvia": {
+        iphone: 29.42,
+        android: 69.84
+      },
+    
+      "Lebanon": {
+        iphone: 23.04,
+        android: 76.75
+      },
+    
+      "Lesotho": {
+        iphone: 6.67,
+        android: 92.82
+      },
+    
+      "Liberia": {
+        iphone: 9.35,
+        android: 86.03
+      },
+    
+      "Libya": {
+        iphone: 15.65,
+        android: 84.19
+      },
+    
+      "Liechtenstein": {
+        iphone: 52.17,
+        android: 47.37
+      },
+    
+      "Lithuania": {
+        iphone: 80.93,
+        android: 18.89
+      },
+    
+      "Luxembourg": {
+        iphone: 43.83,
+        android: 55.44
+      },
+    
+      "Macau": {
+        iphone: 55.76,
+        android: 42.04
+      },
+    
+      "Macedonia": {
+        iphone: 25.95,
+        android: 73.49
+      },
+    
+      "Madagascar": {
+        iphone: 12.39,
+        android: 86.03
+      },
+    
+      "Malawi": {
+        iphone: 3.34,
+        android: 94.91
+      },
+    
+      "Malaysia": {
+        iphone: 32.03,
+        android: 67.06
+      },
+    
+      "Maldives": {
+        iphone: 32.45,
+        android: 67.5
+      },
+    
+      "Mali": {
+        iphone: 20.93,
+        android: 78.86
+      },
+    
+      "Malta": {
+        iphone: 43.63,
+        android: 55.91
+      },
+    
+      "Marshall Islands": {
+        iphone: 40.65,
+        android: 59.24
+      },
+    
+      "Martinique": {
+        iphone: 44.39,
+        android: 55.06
+      },
+    
+      "Mauritania": {
+        iphone: 23.27,
+        android: 76.42
+      },
+    
+      "Mauritius": {
+        iphone: 20.68,
+        android: 78.59
+      },
+    
+      "Mayotte": {
+        iphone: 39.4,
+        android: 60.39
+      },
+    
+      "Mexico": {
+        iphone: 32.16,
+        android: 67.65
+      },
+    
+      "Micronesia": {
+        iphone: 32.28,
+        android: 67.43
+      },
+    
+      "Moldova": {
+        iphone: 26.34,
+        android: 73.27
+      },
+    
+      "Monaco": {
+        iphone: 64.96,
+        android: 34.64
+      },
+    
+      "Mongolia": {
+        iphone: 37.61,
+        android: 62.17
+      },
+    
+      "Montenegro": {
+        iphone: 26.61,
+        android: 72.58
+      },
+    
+      "Montserrat": {
+        iphone: 32.11,
+        android: 67.7
+      },
+    
+      "Morocco": {
+        iphone: 18.27,
+        android: 81.09
+      },
+    
+      "Mozambique": {
+        iphone: 6.32,
+        android: 92.98
+      },
+    
+      "Myanmar": {
+        iphone: 8.6,
+        android: 91.03
+      },
+    
+      "Namibia": {
+        iphone: 14.24,
+        android: 85.42
+      },
+    
+      "Nauru": {
+        iphone: 6.44,
+        android: 93.56
+      },
+    
+      "Nepal": {
+        iphone: 14.82,
+        android: 85.11
+      },
+    
+      "Netherlands": {
+        iphone: 42.03,
+        android: 57.45
+      },
+    
+      "New Caledonia": {
+        iphone: 37.52,
+        android: 62.26
+      },
+    
+      "New Zealand": {
+        iphone: 38.79,
+        android: 60.64
+      },
+    
+      "Nicaragua": {
+        iphone: 27.2,
+        android: 72.67
+      },
+    
+      "Niger": {
+        iphone: 11.07,
+        android: 88.49
+      },
+    
+      "Nigeria": {
+        iphone: 9.49,
+        android: 87.51
+      },
+    
+      "Niue": {
+        iphone: 99.83,
+        android: 0.17
+      },
+    
+      "Northern Mariana Islands": {
+        iphone: 21.94,
+        android: 74.48
+      },
+    
+      "Norway": {
+        iphone: 69.5,
+        android: 30.17
+      },
+    
+      "Oman": {
+        iphone: 29.81,
+        android: 70.05
+      },
+    
+      "Pakistan": {
+        iphone: 4.35,
+        android: 95.26
+      },
+    
+      "Palau": {
+        iphone: 25.91,
+        android: 74.05
+      },
+    
+      "Palestine": {
+        iphone: 12.34,
+        android: 87.58
+      },
+    
+      "Panama": {
+        iphone: 35.42,
+        android: 64.29
+      },
+    
+      "Papua New Guinea": {
+        iphone: 4.44,
+        android: 95.16
+      },
+    
+      "Paraguay": {
+        iphone: 15.9,
+        android: 83.88
+      },
+    
+      "Peru": {
+        iphone: 14.64,
+        android: 84.94
+      },
+    
+      "Philippines": {
+        iphone: 2.61,
+        android: 97.35
+      },
+    
+      "Poland": {
+        iphone: 22.77,
+        android: 77.09
+      },
+    
+      "Portugal": {
+        iphone: 33.5,
+        android: 66.06
+      },
+    
+      "Puerto Rico": {
+        iphone: 54.53,
+        android: 45.12
+      },
+    
+      "Qatar": {
+        iphone: 26.49,
+        android: 73.38
+      },
+    
+      "Republic of Korea": {
+        iphone: 24.08,
+        android: 75.54
+      },
+    
+      "Reunion": {
+        iphone: 40.2,
+        android: 59.62
+      },
+    
+      "Romania": {
+        iphone: 28.03,
+        android: 71.7
+      },
+    
+      "Russian Federation": {
+        iphone: 26.04,
+        android: 73.4
+      },
+    
+      "Rwanda": {
+        iphone: 13.24,
+        android: 84.07
+      },
+    
+      "Saint Barthelemy": {
+        iphone: 88.68,
+        android: 11.08
+      },
+    
+      "Saint Kitts and Nevis": {
+        iphone: 29.08,
+        android: 70.42
+      },
+    
+      "Saint Lucia": {
+        iphone: 26.82,
+        android: 72.74
+      },
+    
+      "Saint Martin": {
+        iphone: 48.27,
+        android: 51.35
+      },
+    
+      "Saint Pierre and Miquelon": {
+        iphone: 95.43,
+        android: 4.56
+      },
+    
+      "Saint Vincent and the Grenadines": {
+        iphone: 24.53,
+        android: 74.78
+      },
+    
+      "Samoa": {
+        iphone: 24.03,
+        android: 75.69
+      },
+    
+      "San Marino": {
+        iphone: 19.81,
+        android: 78.67
+      },
+    
+      "Sao Tome and Principe": {
+        iphone: 5.26,
+        android: 94.7
+      },
+    
+      "Saudi Arabia": {
+        iphone: 28.73,
+        android: 71.19
+      },
+    
+      "Senegal": {
+        iphone: 27.66,
+        android: 72.22
+      },
+    
+      "Serbia": {
+        iphone: 21.35,
+        android: 78.22
+      },
+    
+      "Seychelles": {
+        iphone: 14.38,
+        android: 85.45
+      },
+    
+      "Sierra Leone": {
+        iphone: 8.9,
+        android: 88.71
+      },
+    
+      "Singapore": {
+        iphone: 29.96,
+        android: 69.21
+      },
+    
+      "Slovakia": {
+        iphone: 26.99,
+        android: 72.41
+      },
+    
+      "Slovenia": {
+        iphone: 29.71,
+        android: 69.57
+      },
+    
+      "Solomon Islands": {
+        iphone: 6.95,
+        android: 92.8
+      },
+    
+      "Somalia": {
+        iphone: 13.05,
+        android: 86.78
+      },
+    
+      "South Africa": {
+        iphone: 15.88,
+        android: 83.83
+      },
+    
+      "South Sudan": {
+        iphone: 28.38,
+        android: 71.12
+      },
+    
+      "Spain": {
+        iphone: 23.48,
+        android: 76.21
+      },
+    
+      "Sri Lanka": {
+        iphone: 13.04,
+        android: 86.81
+      },
+    
+      "Sudan": {
+        iphone: 2.05,
+        android: 97.48
+      },
+    
+      "Suriname": {
+        iphone: 19.9,
+        android: 79.92
+      },
+    
+      "Swaziland": {
+        iphone: 6.44,
+        android: 93.3
+      },
+    
+      "Sweden": {
+        iphone: 60.18,
+        android: 39.43
+      },
+    
+      "Switzerland": {
+        iphone: 55,
+        android: 44.25
+      },
+    
+      "Syria": {
+        iphone: 2.92,
+        android: 96.92
+      },
+    
+      "Taiwan": {
+        iphone: 56.05,
+        android: 41.26
+      },
+    
+      "Tajikistan": {
+        iphone: 10.89,
+        android: 89.03
+      },
+    
+      "Tanzania": {
+        iphone: 5.67,
+        android: 80.59
+      },
+    
+      "Thailand": {
+        iphone: 31.09,
+        android: 68.62
+      },
+    
+      "The Gambia": {
+        iphone: 23.6,
+        android: 76.36
+      },
+    
+      "Timor-Leste": {
+        iphone: 11.16,
+        android: 88.78
+      },
+    
+      "Togo": {
+        iphone: 21.51,
+        android: 77.94
+      },
+    
+      "Tokelau": {
+        iphone: 91.47,
+        android: 8.53
+      },
+    
+      "Tonga": {
+        iphone: 25.57,
+        android: 74.28
+      },
+    
+      "Trinidad and Tobago": {
+        iphone: 33.09,
+        android: 65.87
+      },
+    
+      "Tunisia": {
+        iphone: 12.66,
+        android: 87.13
+      },
+    
+      "Turkey": {
+        iphone: 20.13,
+        android: 79.41
+      },
+    
+      "Turkmenistan": {
+        iphone: 3.48,
+        android: 96.44
+      },
+    
+      "Turks and Caicos Islands": {
+        iphone: 58.11,
+        android: 41.57
+      },
+    
+      "Tuvalu": {
+        iphone: 5.26,
+        android: 94.74
+      },
+    
+      "Uganda": {
+        iphone: 6.09,
+        android: 85.95
+      },
+    
+      "Ukraine": {
+        iphone: 32.31,
+        android: 67.32
+      },
+    
+      "United Arab Emirates": {
+        iphone: 14.81,
+        android: 85.06
+      },
+    
+      "United Kingdom": {
+        iphone: 50.81,
+        android: 48.76
+      },
+    
+      "United States": {
+        iphone: 51.07,
+        android: 48.74
+      },
+    
+      "United States Virgin Islands": {
+        iphone: 59.21,
+        android: 40.08
+      },
+    
+      "Uruguay": {
+        iphone: 33.41,
+        android: 66.52
+      },
+    
+      "Uzbekistan": {
+        iphone: 12.98,
+        android: 86.89
+      },
+    
+      "Vanuatu": {
+        iphone: 7,
+        android: 92.67
+      },
+    
+      "Vatican City": {
+        iphone: 50.24,
+        android: 49.59
+      },
+    
+      "Venezuela": {
+        iphone: 9.17,
+        android: 90.67
+      },
+    
+      "Vietnam": {
+        iphone: 30.17,
+        android: 69.27
+      },
+    
+      "Wallis and Futuna": {
+        iphone: 66.94,
+        android: 33.06
+      },
+    
+      "Western Sahara": {
+        iphone: 0,
+        android: 100
+      },
+    
+      "Yemen": {
+        iphone: 4.38,
+        android: 92.27
+      },
+    
+      "Zambia": {
+        iphone: 7.49,
+        android: 90.13
+      },
+    
+      "Zimbabwe": {
+        iphone: 10.48,
+        android: 88.89
+      },
+    
+  }
+  console.log(data)
+  const paths = [...document.querySelectorAll('#map path')]
+  const tooltip = document.querySelector('#tooltip')
+  const content = x => `
+    <p><strong>${x.getAttribute('name')}</strong></p>
+    <div>
+    <p style="display: flex; gap: 1ch; justify-content: space-between;"><span>Apple</span> <span>${data[x.getAttribute('name')].iphone}%</span></p>
+    <p style="display: flex; gap: 1ch; justify-content: space-between;"><span>Android</span> <span>${data[x.getAttribute('name')].android}%</span></p>
+    </div>
+  `
+  const handleHover = evt => {
+    const { target } = evt;
+    tooltip.innerHTML = content(target)
+    tooltip.style = `display: block; top: ${evt.clientY}px; left: ${evt.clientX}px`
+    target.addEventListener('mouseout', () => { tooltip.style = 'display: none;' }, { once: true });
+  }
+  paths.forEach(path => {
+    path.addEventListener('mouseover', handleHover)
+  })
+</script>
       <table>
         <tr>
           <th>Country</th>
@@ -6101,7 +7291,7 @@ THE SOFTWARE.
         
         <tr>
           <td>Western Sahara</td>
-          <td>%</td>
+          <td>0%</td>
           <td>100%</td>
         </tr>
         
