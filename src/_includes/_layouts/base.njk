@@ -8,13 +8,15 @@
   </head>
   <body data-style="winner">
     <header>
-      <a href="{{ '/' | url }}"><strong>CX Technology</strong> - Data Maps</a>
+      <div class="wrapper gutter"><a href="{{ '/' | url }}"><strong>CX Technology</strong> - Data Maps</a></div>
     </header>
-    {% include 'nav.njk' %}
-    <main class="flow">
+    <div class="wrapper gutter">{% include 'nav.njk' %}</div>
+    <main class="wrapper gutter flow">
       <h1>{{ title | safe }}</h1>
       {{ content | safe }}
     </main>
-    <footer>&copy; 2025 Thom made this</footer>
+    <footer>
+      <div class="wrapper gutter">&copy; 2025 Thom made this</div>
+    </footer>
   </body>
 </html>

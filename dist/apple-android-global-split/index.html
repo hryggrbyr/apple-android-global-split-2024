@@ -206,9 +206,6 @@ header {
 }
 
 main {
-  max-width: 80rem;
-  margin-inline: auto;
-  padding-inline: var(--gutter);
   padding-block: var(--spacing);
 }
 
@@ -216,8 +213,16 @@ footer {
   width: 100%;
   background: #334334;
   color: whitesmoke;
-  padding-inline: var(--gutter);
   padding-block: var(--spacing);
+}
+
+.wrapper {
+  max-width: 80rem;
+  margin-inline: auto;
+}
+
+.gutter {
+    padding-inline: var(--gutter);
 }
 
 .flow>*+* {
@@ -270,14 +275,14 @@ tr th {
   </head>
   <body data-style="winner">
     <header>
-      <a href="/statistics-maps/"><strong>CX Technology</strong> - Data Maps</a>
+      <div class="wrapper gutter"><a href="/statistics-maps/"><strong>CX Technology</strong> - Data Maps</a></div>
     </header>
-    <nav style="display: flex; flex-wrap: wrap; gap: 1rem; padding-block: var(--spacing); padding-inline: var(--gutter);">
+    <div class="wrapper gutter"><nav style="display: flex; flex-wrap: wrap; gap: 1rem; padding-block: var(--spacing);">
 
 	<a href="/statistics-maps/apple-android-global-split" title="Apple/Android Global Split">Apple/Android Global Split</a>
 
-</nav>
-    <main class="flow">
+</nav></div>
+    <main class="wrapper gutter flow">
       <h1>Apple/Android Global Split</h1>
       
 <?xml
@@ -7349,6 +7354,8 @@ THE SOFTWARE.
 <p>Map provided by <a href="https://simplemaps.com/resources/svg-world">simplemaps.com</a> and adapted by me.</p>
 
     </main>
-    <footer>&copy; 2025 Thom made this</footer>
+    <footer>
+      <div class="wrapper gutter">&copy; 2025 Thom made this</div>
+    </footer>
   </body>
 </html>
