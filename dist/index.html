@@ -193,24 +193,33 @@ a:not([class]) {
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   background: canvas;
   color: canvasText;
 }
 
-header {
+body > header {
   background-color: whitesmoke;
   color: #334334;
-  width: 100%;
-  padding-inline: var(--gutter);
   padding-block: var(--spacing);
+  height: fit-content;
+}
+
+body > .wrapper:has(nav) {
+    padding-block: var(--spacing);
+    height: fit-content;
 }
 
 main {
+  width: 100%;
+  flex-grow: 999;
   padding-block: var(--spacing);
 }
 
-footer {
-  width: 100%;
+body > footer {
+  height: fit-content;
   background: #334334;
   color: whitesmoke;
   padding-block: var(--spacing);
@@ -222,7 +231,7 @@ footer {
 }
 
 .gutter {
-    padding-inline: var(--gutter);
+  padding-inline: var(--gutter);
 }
 
 .flow>*+* {
