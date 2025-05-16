@@ -294,6 +294,24 @@ tr th {
     <main class="wrapper gutter flow">
       <h1>Apple/Android Global Split</h1>
       
+<form>
+	<label><input id="style" type="radio" name="style" value="winner" checked> Winner</label>
+	<label><input id="style" type="radio" name="style" value="thirds"> Thirds</label>
+	<label><input id="style" type="radio" name="style" value="nuance"> Nuance</label>
+</form>
+
+<script type="text/javascript">
+	const form = document.forms[0]
+	const body = document.body
+	const buttons = form.querySelectorAll('input')
+	const handleChange = evt => {
+		const { target } = evt
+		body.dataset.style = target.value
+	}
+	buttons.forEach(button => {
+		button.addEventListener('change', handleChange)
+	})
+</script>
 <?xml
 version="1.0"?>
 <!--
