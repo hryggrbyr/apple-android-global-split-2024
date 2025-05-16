@@ -1,4 +1,4 @@
-<nav style="display: flex; flex-wrap: wrap; gap: 1rem; padding-block: var(--spacing);">
+<nav style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: flex-start; height: fit-content; padding-block: 1lh;">
 {% for item in nav %}
 	<a href="{{ item.url | url }}" title="{{ item.title | safe }}">{{ item.title | safe }}</a>
 {% endfor %}
