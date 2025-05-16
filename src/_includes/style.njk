@@ -241,5 +241,12 @@ tr th {
   text-align: left;
   border-bottom: 1px solid #334334;
 }
+[id^="legend-"] {
+  display: none !important;
+}
+
+:is([data-style="winner"] #legend-winner, [data-style="thirds"] #legend-thirds, [data-style="nuance"] #legend-nuance) {
+  display: flex !important;
+}
 
 </style>

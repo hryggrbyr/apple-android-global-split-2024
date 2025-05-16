@@ -2092,19 +2092,36 @@ THE SOFTWARE.
   <circle cx="1798.2" cy="719.3" id="2"></circle>
 </svg>
 
-<div class="flex">
-  <div class="legend" style="background-color: hsl(223, 50%, 50%)"></div>
-  <p class="label">Apple</p>
+<div id="legend-winner" class="flex" style="flex-wrap: wrap; justify-content: flex-start;">
+  <div class="flex">
+    <div class="legend" style="background-color: hsl(223, 50%, 50%)"></div>
+    <p class="label">Apple Dominant</p>
+  </div>
+  <div class="flex">
+    <div class="legend" style="background-color: hsl(147, 50%, 50%)"></div>
+    <p class="label">Android Dominant</p>
+  </div>
 </div>
-<div class="flex">
-  <div class="legend" style="background-color: hsl(147, 50%, 50%)"></div>
-  <p class="label">Android</p>
+<div id="legend-thirds" class="flex" style="flex-wrap: wrap; justify-content: flex-start;">
+  <div class="flex">
+    <div class="legend" style="background-color: hsl(223, 50%, 50%)"></div>
+    <p class="label">Apple Dominant</p>
+  </div>
+  <div class="thirds flex">
+    <div class="legend" style="background-color: hsl(185, 50%, 50%)"></div>
+    <p class="label">Apple/Android Split</p>
+  </div>
+  <div class="flex">
+    <div class="legend" style="background-color: hsl(147, 50%, 50%)"></div>
+    <p class="label">Android Dominant</p>
+  </div>
+</div>
+<div id="legend-nuance" class="flex" style="flex-wrap: wrap; justify-content: flex-start;">
+  <span>Android</span>
+  <span style="flex-grow: 99; background: linear-gradient(90deg, hsl(147, 50%, 50%), hsl(223, 50%, 50%)); height: 1lh;"></span>
+  <span>Apple</span>
 </div>
 <style>
-    :root{
-      --apple: #717378;
-      --android: #3ddc84;
-    }
   svg {
     max-width: 100%;
     max-height: 100vh;
@@ -2114,9 +2131,16 @@ THE SOFTWARE.
   #map path {
     color: canvasText;
   }
+
   {% for entry in marketShare %}
-    #map path[name="{{ entry.country }}"] {
-      color: hsl({{ entry | winner }}, {{ entry | weighting }}%, 50%);
+    [data-style="winner"] #map path[name="{{ entry.country }}"] {
+      color: hsl({{ entry | winner }}, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="{{ entry.country }}"] {
+      color: hsl({{ entry | thirds }}, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="{{ entry.country }}"] {
+      color: hsl({{ entry | weighting }}, 50%, 50%);
     }
   {% endfor %}
 

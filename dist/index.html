@@ -247,15 +247,40 @@ tr th {
   text-align: left;
   border-bottom: 1px solid #334334;
 }
+[id^="legend-"] {
+  display: none !important;
+}
+
+:is([data-style="winner"] #legend-winner, [data-style="thirds"] #legend-thirds, [data-style="nuance"] #legend-nuance) {
+  display: flex !important;
+}
 
 </style>
   </head>
-  <body>
+  <body data-style="winner">
     <header>
       <p><strong>Data Maps</strong></p>
     </header>
     <main class="flow">
       <h1>Apple/Android Split by country</h1>
+      <form>
+	<label><input id="style" type="radio" name="style" value="winner" checked> Winner</label>
+	<label><input id="style" type="radio" name="style" value="thirds"> Thirds</label>
+	<label><input id="style" type="radio" name="style" value="nuance"> Nuance</label>
+</form>
+
+<script type="text/javascript">
+	const form = document.forms[0]
+	const body = document.body
+	const buttons = form.querySelectorAll('input')
+	const handleChange = evt => {
+		const { target } = evt
+		body.dataset.style = target.value
+	}
+	buttons.forEach(button => {
+		button.addEventListener('change', handleChange)
+	})
+</script>
       <?xml
 version="1.0"?>
 <!--
@@ -2350,19 +2375,36 @@ THE SOFTWARE.
   <circle cx="1798.2" cy="719.3" id="2"></circle>
 </svg>
 
-<div class="flex">
-  <div class="legend" style="background-color: hsl(223, 50%, 50%)"></div>
-  <p class="label">Apple</p>
+<div id="legend-winner" class="flex" style="flex-wrap: wrap; justify-content: flex-start;">
+  <div class="flex">
+    <div class="legend" style="background-color: hsl(223, 50%, 50%)"></div>
+    <p class="label">Apple Dominant</p>
+  </div>
+  <div class="flex">
+    <div class="legend" style="background-color: hsl(147, 50%, 50%)"></div>
+    <p class="label">Android Dominant</p>
+  </div>
 </div>
-<div class="flex">
-  <div class="legend" style="background-color: hsl(147, 50%, 50%)"></div>
-  <p class="label">Android</p>
+<div id="legend-thirds" class="flex" style="flex-wrap: wrap; justify-content: flex-start;">
+  <div class="flex">
+    <div class="legend" style="background-color: hsl(223, 50%, 50%)"></div>
+    <p class="label">Apple Dominant</p>
+  </div>
+  <div class="thirds flex">
+    <div class="legend" style="background-color: hsl(185, 50%, 50%)"></div>
+    <p class="label">Apple/Android Split</p>
+  </div>
+  <div class="flex">
+    <div class="legend" style="background-color: hsl(147, 50%, 50%)"></div>
+    <p class="label">Android Dominant</p>
+  </div>
+</div>
+<div id="legend-nuance" class="flex" style="flex-wrap: wrap; justify-content: flex-start;">
+  <span>Android</span>
+  <span style="flex-grow: 99; background: linear-gradient(90deg, hsl(147, 50%, 50%), hsl(223, 50%, 50%)); height: 1lh;"></span>
+  <span>Apple</span>
 </div>
 <style>
-    :root{
-      --apple: #717378;
-      --android: #3ddc84;
-    }
   svg {
     max-width: 100%;
     max-height: 100vh;
@@ -2372,925 +2414,2306 @@ THE SOFTWARE.
   #map path {
     color: canvasText;
   }
+
   
-    #map path[name="Afghanistan"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Afghanistan"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Afghanistan"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Afghanistan"] {
+      color: hsl(176.9, 50%, 50%);
+    }
   
-    #map path[name="Albania"] {
-      color: hsl(223, 70%, 50%);
+    [data-style="winner"] #map path[name="Albania"] {
+      color: hsl(223, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Albania"] {
+      color: hsl(223, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Albania"] {
+      color: hsl(214.9, 50%, 50%);
+    }
   
-    #map path[name="Algeria"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Algeria"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Algeria"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Algeria"] {
+      color: hsl(176.9, 50%, 50%);
+    }
   
-    #map path[name="American Samoa"] {
-      color: hsl(223, 100%, 50%);
+    [data-style="winner"] #map path[name="American Samoa"] {
+      color: hsl(223, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="American Samoa"] {
+      color: hsl(223, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="American Samoa"] {
+      color: hsl(237.7, 50%, 50%);
+    }
   
-    #map path[name="Andorra"] {
-      color: hsl(223, 70%, 50%);
+    [data-style="winner"] #map path[name="Andorra"] {
+      color: hsl(223, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Andorra"] {
+      color: hsl(185, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Andorra"] {
+      color: hsl(214.9, 50%, 50%);
     }
   
-    #map path[name="Angola"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Angola"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Angola"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Angola"] {
+      color: hsl(176.9, 50%, 50%);
+    }
   
-    #map path[name="Anguilla"] {
-      color: hsl(223, 80%, 50%);
+    [data-style="winner"] #map path[name="Anguilla"] {
+      color: hsl(223, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Anguilla"] {
+      color: hsl(223, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Anguilla"] {
+      color: hsl(222.5, 50%, 50%);
     }
   
-    #map path[name="Antigua and Barbuda"] {
-      color: hsl(147, 70%, 50%);
+    [data-style="winner"] #map path[name="Antigua and Barbuda"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Antigua and Barbuda"] {
+      color: hsl(185, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Antigua and Barbuda"] {
+      color: hsl(192.1, 50%, 50%);
+    }
   
-    #map path[name="Argentina"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Argentina"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Argentina"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Argentina"] {
+      color: hsl(176.9, 50%, 50%);
+    }
   
-    #map path[name="Armenia"] {
-      color: hsl(147, 70%, 50%);
+    [data-style="winner"] #map path[name="Armenia"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Armenia"] {
+      color: hsl(185, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Armenia"] {
+      color: hsl(192.1, 50%, 50%);
+    }
   
-    #map path[name="Aruba"] {
-      color: hsl(147, 60%, 50%);
+    [data-style="winner"] #map path[name="Aruba"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Aruba"] {
+      color: hsl(185, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Aruba"] {
+      color: hsl(199.7, 50%, 50%);
+    }
   
-    #map path[name="Australia"] {
-      color: hsl(223, 60%, 50%);
+    [data-style="winner"] #map path[name="Australia"] {
+      color: hsl(223, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Australia"] {
+      color: hsl(185, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Australia"] {
+      color: hsl(207.3, 50%, 50%);
     }
   
-    #map path[name="Austria"] {
-      color: hsl(147, 60%, 50%);
+    [data-style="winner"] #map path[name="Austria"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Austria"] {
+      color: hsl(185, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Austria"] {
+      color: hsl(199.7, 50%, 50%);
+    }
   
-    #map path[name="Azerbaijan"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Azerbaijan"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Azerbaijan"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Azerbaijan"] {
+      color: hsl(176.9, 50%, 50%);
     }
   
-    #map path[name="Bahamas"] {
-      color: hsl(223, 100%, 50%);
+    [data-style="winner"] #map path[name="Bahamas"] {
+      color: hsl(223, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Bahamas"] {
+      color: hsl(223, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Bahamas"] {
+      color: hsl(237.7, 50%, 50%);
+    }
   
-    #map path[name="Bahrain"] {
-      color: hsl(147, 70%, 50%);
+    [data-style="winner"] #map path[name="Bahrain"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Bahrain"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Bahrain"] {
+      color: hsl(192.1, 50%, 50%);
+    }
   
-    #map path[name="Bangladesh"] {
-      color: hsl(147, 100%, 50%);
+    [data-style="winner"] #map path[name="Bangladesh"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Bangladesh"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Bangladesh"] {
+      color: hsl(169.3, 50%, 50%);
+    }
   
-    #map path[name="Barbados"] {
-      color: hsl(147, 70%, 50%);
+    [data-style="winner"] #map path[name="Barbados"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Barbados"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Barbados"] {
+      color: hsl(192.1, 50%, 50%);
+    }
   
-    #map path[name="Belarus"] {
-      color: hsl(147, 70%, 50%);
+    [data-style="winner"] #map path[name="Belarus"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Belarus"] {
+      color: hsl(185, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Belarus"] {
+      color: hsl(192.1, 50%, 50%);
     }
   
-    #map path[name="Belgium"] {
-      color: hsl(147, 60%, 50%);
+    [data-style="winner"] #map path[name="Belgium"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Belgium"] {
+      color: hsl(185, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Belgium"] {
+      color: hsl(199.7, 50%, 50%);
+    }
   
-    #map path[name="Belize"] {
-      color: hsl(223, 70%, 50%);
+    [data-style="winner"] #map path[name="Belize"] {
+      color: hsl(223, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Belize"] {
+      color: hsl(185, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Belize"] {
+      color: hsl(214.9, 50%, 50%);
     }
   
-    #map path[name="Benin"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Benin"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Benin"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Benin"] {
+      color: hsl(176.9, 50%, 50%);
+    }
   
-    #map path[name="Bermuda"] {
-      color: hsl(223, 100%, 50%);
+    [data-style="winner"] #map path[name="Bermuda"] {
+      color: hsl(223, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Bermuda"] {
+      color: hsl(223, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Bermuda"] {
+      color: hsl(237.7, 50%, 50%);
+    }
   
-    #map path[name="Bhutan"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Bhutan"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Bhutan"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Bhutan"] {
+      color: hsl(176.9, 50%, 50%);
+    }
   
-    #map path[name="Bolivia"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Bolivia"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Bolivia"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Bolivia"] {
+      color: hsl(176.9, 50%, 50%);
+    }
   
-    #map path[name="Bosnia and Herzegovina"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="Bosnia and Herzegovina"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Bosnia and Herzegovina"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Bosnia and Herzegovina"] {
+      color: hsl(184.5, 50%, 50%);
+    }
   
-    #map path[name="Botswana"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Botswana"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Botswana"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Botswana"] {
+      color: hsl(154.6, 50%, 50%);
+    }
   
-    #map path[name="Brazil"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Brazil"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Brazil"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Brazil"] {
+      color: hsl(176.9, 50%, 50%);
+    }
   
-    #map path[name="British Virgin Islands"] {
-      color: hsl(147, 60%, 50%);
+    [data-style="winner"] #map path[name="British Virgin Islands"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="British Virgin Islands"] {
+      color: hsl(185, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="British Virgin Islands"] {
+      color: hsl(199.7, 50%, 50%);
+    }
   
-    #map path[name="Brunei Darussalam"] {
-      color: hsl(147, 70%, 50%);
+    [data-style="winner"] #map path[name="Brunei Darussalam"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Brunei Darussalam"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Brunei Darussalam"] {
+      color: hsl(192.1, 50%, 50%);
     }
   
-    #map path[name="Bulgaria"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Bulgaria"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Bulgaria"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Bulgaria"] {
+      color: hsl(176.9, 50%, 50%);
+    }
   
-    #map path[name="Burkina Faso"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Burkina Faso"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Burkina Faso"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Burkina Faso"] {
+      color: hsl(176.9, 50%, 50%);
     }
   
-    #map path[name="Burundi"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Burundi"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Burundi"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Burundi"] {
+      color: hsl(176.9, 50%, 50%);
+    }
   
-    #map path[name="Cambodia"] {
-      color: hsl(147, 60%, 50%);
+    [data-style="winner"] #map path[name="Cambodia"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Cambodia"] {
+      color: hsl(185, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Cambodia"] {
+      color: hsl(199.7, 50%, 50%);
+    }
   
-    #map path[name="Cameroon"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="Cameroon"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Cameroon"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Cameroon"] {
+      color: hsl(162.2, 50%, 50%);
+    }
   
-    #map path[name="Canada"] {
-      color: hsl(223, 70%, 50%);
+    [data-style="winner"] #map path[name="Canada"] {
+      color: hsl(223, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Canada"] {
+      color: hsl(185, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Canada"] {
+      color: hsl(214.9, 50%, 50%);
+    }
   
-    #map path[name="Cape Verde"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Cape Verde"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Cape Verde"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Cape Verde"] {
+      color: hsl(176.9, 50%, 50%);
     }
   
-    #map path[name="Cayman Islands"] {
-      color: hsl(223, 60%, 50%);
+    [data-style="winner"] #map path[name="Cayman Islands"] {
+      color: hsl(223, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Cayman Islands"] {
+      color: hsl(185, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Cayman Islands"] {
+      color: hsl(207.3, 50%, 50%);
+    }
   
-    #map path[name="Central African Republic"] {
-      color: hsl(147, 100%, 50%);
+    [data-style="winner"] #map path[name="Central African Republic"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Central African Republic"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Central African Republic"] {
+      color: hsl(169.3, 50%, 50%);
     }
   
-    #map path[name="Chad"] {
-      color: hsl(147, 100%, 50%);
+    [data-style="winner"] #map path[name="Chad"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Chad"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Chad"] {
+      color: hsl(169.3, 50%, 50%);
+    }
   
-    #map path[name="Chile"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="Chile"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Chile"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Chile"] {
+      color: hsl(184.5, 50%, 50%);
     }
   
-    #map path[name="China"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="China"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="China"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="China"] {
+      color: hsl(184.5, 50%, 50%);
+    }
   
-    #map path[name="Colombia"] {
-      color: hsl(147, 70%, 50%);
+    [data-style="winner"] #map path[name="Colombia"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Colombia"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Colombia"] {
+      color: hsl(192.1, 50%, 50%);
     }
   
-    #map path[name="Comoros"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Comoros"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Comoros"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Comoros"] {
+      color: hsl(176.9, 50%, 50%);
+    }
   
-    #map path[name="Cook Islands"] {
-      color: hsl(147, 60%, 50%);
+    [data-style="winner"] #map path[name="Cook Islands"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Cook Islands"] {
+      color: hsl(185, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Cook Islands"] {
+      color: hsl(199.7, 50%, 50%);
+    }
   
-    #map path[name="Costa Rica"] {
-      color: hsl(147, 70%, 50%);
+    [data-style="winner"] #map path[name="Costa Rica"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Costa Rica"] {
+      color: hsl(185, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Costa Rica"] {
+      color: hsl(192.1, 50%, 50%);
+    }
   
-    #map path[name="Côte d&#39;Ivoire"] {
-      color: hsl(147, 70%, 50%);
+    [data-style="winner"] #map path[name="Côte d&#39;Ivoire"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Côte d&#39;Ivoire"] {
+      color: hsl(185, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Côte d&#39;Ivoire"] {
+      color: hsl(192.1, 50%, 50%);
+    }
   
-    #map path[name="Croatia"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="Croatia"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Croatia"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Croatia"] {
+      color: hsl(184.5, 50%, 50%);
     }
   
-    #map path[name="Cuba"] {
-      color: hsl(147, 100%, 50%);
+    [data-style="winner"] #map path[name="Cuba"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Cuba"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Cuba"] {
+      color: hsl(169.3, 50%, 50%);
+    }
   
-    #map path[name="Cyprus"] {
-      color: hsl(147, 70%, 50%);
+    [data-style="winner"] #map path[name="Cyprus"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Cyprus"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Cyprus"] {
+      color: hsl(192.1, 50%, 50%);
     }
   
-    #map path[name="Czechia"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="Czechia"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Czechia"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Czechia"] {
+      color: hsl(184.5, 50%, 50%);
+    }
   
-    #map path[name="Dem. Rep. Korea"] {
-      color: hsl(223, 70%, 50%);
+    [data-style="winner"] #map path[name="Dem. Rep. Korea"] {
+      color: hsl(223, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Dem. Rep. Korea"] {
+      color: hsl(223, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Dem. Rep. Korea"] {
+      color: hsl(214.9, 50%, 50%);
+    }
   
-    #map path[name="Democratic Republic of the Congo"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Democratic Republic of the Congo"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Democratic Republic of the Congo"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Democratic Republic of the Congo"] {
+      color: hsl(176.9, 50%, 50%);
+    }
   
-    #map path[name="Denmark"] {
-      color: hsl(223, 70%, 50%);
+    [data-style="winner"] #map path[name="Denmark"] {
+      color: hsl(223, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Denmark"] {
+      color: hsl(223, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Denmark"] {
+      color: hsl(214.9, 50%, 50%);
+    }
   
-    #map path[name="Djibouti"] {
-      color: hsl(147, 100%, 50%);
+    [data-style="winner"] #map path[name="Djibouti"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Djibouti"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Djibouti"] {
+      color: hsl(169.3, 50%, 50%);
+    }
   
-    #map path[name="Dominica"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="Dominica"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Dominica"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Dominica"] {
+      color: hsl(184.5, 50%, 50%);
+    }
   
-    #map path[name="Dominican Republic"] {
-      color: hsl(223, 70%, 50%);
+    [data-style="winner"] #map path[name="Dominican Republic"] {
+      color: hsl(223, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Dominican Republic"] {
+      color: hsl(223, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Dominican Republic"] {
+      color: hsl(214.9, 50%, 50%);
+    }
   
-    #map path[name="Ecuador"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="Ecuador"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Ecuador"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Ecuador"] {
+      color: hsl(184.5, 50%, 50%);
+    }
   
-    #map path[name="Egypt"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Egypt"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Egypt"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Egypt"] {
+      color: hsl(176.9, 50%, 50%);
     }
   
-    #map path[name="El Salvador"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="El Salvador"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="El Salvador"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="El Salvador"] {
+      color: hsl(184.5, 50%, 50%);
+    }
   
-    #map path[name="Equatorial Guinea"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="Equatorial Guinea"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Equatorial Guinea"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Equatorial Guinea"] {
+      color: hsl(184.5, 50%, 50%);
     }
   
-    #map path[name="Eritrea"] {
-      color: hsl(147, 100%, 50%);
+    [data-style="winner"] #map path[name="Eritrea"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Eritrea"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Eritrea"] {
+      color: hsl(169.3, 50%, 50%);
+    }
   
-    #map path[name="Estonia"] {
-      color: hsl(147, 70%, 50%);
+    [data-style="winner"] #map path[name="Estonia"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Estonia"] {
+      color: hsl(185, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Estonia"] {
+      color: hsl(192.1, 50%, 50%);
+    }
   
-    #map path[name="Ethiopia"] {
-      color: hsl(147, 100%, 50%);
+    [data-style="winner"] #map path[name="Ethiopia"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Ethiopia"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Ethiopia"] {
+      color: hsl(169.3, 50%, 50%);
+    }
   
-    #map path[name="Falkland Islands"] {
-      color: hsl(147, 70%, 50%);
+    [data-style="winner"] #map path[name="Falkland Islands"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Falkland Islands"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Falkland Islands"] {
+      color: hsl(192.1, 50%, 50%);
+    }
   
-    #map path[name="Faroe Islands"] {
-      color: hsl(223, 90%, 50%);
+    [data-style="winner"] #map path[name="Faroe Islands"] {
+      color: hsl(223, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Faroe Islands"] {
+      color: hsl(223, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Faroe Islands"] {
+      color: hsl(230.1, 50%, 50%);
     }
   
-    #map path[name="Fiji"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Fiji"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Fiji"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Fiji"] {
+      color: hsl(176.9, 50%, 50%);
+    }
   
-    #map path[name="Finland"] {
-      color: hsl(147, 70%, 50%);
+    [data-style="winner"] #map path[name="Finland"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Finland"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Finland"] {
+      color: hsl(192.1, 50%, 50%);
     }
   
-    #map path[name="France"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="France"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="France"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="France"] {
+      color: hsl(184.5, 50%, 50%);
+    }
   
-    #map path[name="French Guiana"] {
-      color: hsl(147, 70%, 50%);
+    [data-style="winner"] #map path[name="French Guiana"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="French Guiana"] {
+      color: hsl(185, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="French Guiana"] {
+      color: hsl(192.1, 50%, 50%);
+    }
   
-    #map path[name="French Polynesia"] {
-      color: hsl(223, 60%, 50%);
+    [data-style="winner"] #map path[name="French Polynesia"] {
+      color: hsl(223, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="French Polynesia"] {
+      color: hsl(185, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="French Polynesia"] {
+      color: hsl(207.3, 50%, 50%);
+    }
   
-    #map path[name="Gabon"] {
-      color: hsl(147, 70%, 50%);
+    [data-style="winner"] #map path[name="Gabon"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Gabon"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Gabon"] {
+      color: hsl(192.1, 50%, 50%);
+    }
   
-    #map path[name="Georgia"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="Georgia"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Georgia"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Georgia"] {
+      color: hsl(184.5, 50%, 50%);
     }
   
-    #map path[name="Germany"] {
-      color: hsl(147, 70%, 50%);
+    [data-style="winner"] #map path[name="Germany"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Germany"] {
+      color: hsl(185, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Germany"] {
+      color: hsl(192.1, 50%, 50%);
+    }
   
-    #map path[name="Ghana"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Ghana"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Ghana"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Ghana"] {
+      color: hsl(176.9, 50%, 50%);
     }
   
-    #map path[name="Gibraltar"] {
-      color: hsl(223, 60%, 50%);
+    [data-style="winner"] #map path[name="Gibraltar"] {
+      color: hsl(223, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Gibraltar"] {
+      color: hsl(185, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Gibraltar"] {
+      color: hsl(207.3, 50%, 50%);
+    }
   
-    #map path[name="Greece"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="Greece"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Greece"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Greece"] {
+      color: hsl(184.5, 50%, 50%);
+    }
   
-    #map path[name="Greenland"] {
-      color: hsl(147, 60%, 50%);
+    [data-style="winner"] #map path[name="Greenland"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Greenland"] {
+      color: hsl(185, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Greenland"] {
+      color: hsl(199.7, 50%, 50%);
+    }
   
-    #map path[name="Grenada"] {
-      color: hsl(147, 70%, 50%);
+    [data-style="winner"] #map path[name="Grenada"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Grenada"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Grenada"] {
+      color: hsl(192.1, 50%, 50%);
+    }
   
-    #map path[name="Guadeloupe"] {
-      color: hsl(147, 70%, 50%);
+    [data-style="winner"] #map path[name="Guadeloupe"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Guadeloupe"] {
+      color: hsl(185, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Guadeloupe"] {
+      color: hsl(192.1, 50%, 50%);
     }
   
-    #map path[name="Guam"] {
-      color: hsl(223, 60%, 50%);
+    [data-style="winner"] #map path[name="Guam"] {
+      color: hsl(223, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Guam"] {
+      color: hsl(185, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Guam"] {
+      color: hsl(207.3, 50%, 50%);
+    }
   
-    #map path[name="Guatemala"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="Guatemala"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Guatemala"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Guatemala"] {
+      color: hsl(184.5, 50%, 50%);
     }
   
-    #map path[name="Guernsey"] {
-      color: hsl(223, 80%, 50%);
+    [data-style="winner"] #map path[name="Guernsey"] {
+      color: hsl(223, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Guernsey"] {
+      color: hsl(223, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Guernsey"] {
+      color: hsl(222.5, 50%, 50%);
+    }
   
-    #map path[name="Guinea"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Guinea"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Guinea"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Guinea"] {
+      color: hsl(176.9, 50%, 50%);
     }
   
-    #map path[name="Guinea-Bissau"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Guinea-Bissau"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Guinea-Bissau"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Guinea-Bissau"] {
+      color: hsl(176.9, 50%, 50%);
+    }
   
-    #map path[name="Guyana"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="Guyana"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Guyana"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Guyana"] {
+      color: hsl(184.5, 50%, 50%);
     }
   
-    #map path[name="Haiti"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Haiti"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Haiti"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Haiti"] {
+      color: hsl(176.9, 50%, 50%);
+    }
   
-    #map path[name="Honduras"] {
-      color: hsl(223, 60%, 50%);
+    [data-style="winner"] #map path[name="Honduras"] {
+      color: hsl(223, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Honduras"] {
+      color: hsl(185, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Honduras"] {
+      color: hsl(207.3, 50%, 50%);
+    }
   
-    #map path[name="Hong Kong"] {
-      color: hsl(147, 60%, 50%);
+    [data-style="winner"] #map path[name="Hong Kong"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Hong Kong"] {
+      color: hsl(185, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Hong Kong"] {
+      color: hsl(199.7, 50%, 50%);
+    }
   
-    #map path[name="Hungary"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Hungary"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Hungary"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Hungary"] {
+      color: hsl(176.9, 50%, 50%);
+    }
   
-    #map path[name="Iceland"] {
-      color: hsl(223, 70%, 50%);
+    [data-style="winner"] #map path[name="Iceland"] {
+      color: hsl(223, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Iceland"] {
+      color: hsl(185, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Iceland"] {
+      color: hsl(214.9, 50%, 50%);
     }
   
-    #map path[name="India"] {
-      color: hsl(147, 100%, 50%);
+    [data-style="winner"] #map path[name="India"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="India"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="India"] {
+      color: hsl(169.3, 50%, 50%);
+    }
   
-    #map path[name="Indonesia"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Indonesia"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Indonesia"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Indonesia"] {
+      color: hsl(176.9, 50%, 50%);
     }
   
-    #map path[name="Iran"] {
-      color: hsl(147, 100%, 50%);
+    [data-style="winner"] #map path[name="Iran"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Iran"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Iran"] {
+      color: hsl(169.3, 50%, 50%);
+    }
   
-    #map path[name="Iraq"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Iraq"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Iraq"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Iraq"] {
+      color: hsl(176.9, 50%, 50%);
+    }
   
-    #map path[name="Ireland"] {
-      color: hsl(147, 60%, 50%);
+    [data-style="winner"] #map path[name="Ireland"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Ireland"] {
+      color: hsl(185, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Ireland"] {
+      color: hsl(199.7, 50%, 50%);
+    }
   
-    #map path[name="Isle of Man"] {
-      color: hsl(223, 70%, 50%);
+    [data-style="winner"] #map path[name="Isle of Man"] {
+      color: hsl(223, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Isle of Man"] {
+      color: hsl(185, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Isle of Man"] {
+      color: hsl(214.9, 50%, 50%);
+    }
   
-    #map path[name="Israel"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="Israel"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Israel"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Israel"] {
+      color: hsl(184.5, 50%, 50%);
+    }
   
-    #map path[name="Italy"] {
-      color: hsl(147, 70%, 50%);
+    [data-style="winner"] #map path[name="Italy"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Italy"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Italy"] {
+      color: hsl(192.1, 50%, 50%);
+    }
   
-    #map path[name="Jamaica"] {
-      color: hsl(147, 60%, 50%);
+    [data-style="winner"] #map path[name="Jamaica"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Jamaica"] {
+      color: hsl(185, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Jamaica"] {
+      color: hsl(177.4, 50%, 50%);
+    }
   
-    #map path[name="Japan"] {
-      color: hsl(223, 60%, 50%);
+    [data-style="winner"] #map path[name="Japan"] {
+      color: hsl(223, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Japan"] {
+      color: hsl(185, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Japan"] {
+      color: hsl(207.3, 50%, 50%);
+    }
   
-    #map path[name="Jersey"] {
-      color: hsl(223, 70%, 50%);
+    [data-style="winner"] #map path[name="Jersey"] {
+      color: hsl(223, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Jersey"] {
+      color: hsl(223, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Jersey"] {
+      color: hsl(214.9, 50%, 50%);
     }
   
-    #map path[name="Jordan"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="Jordan"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Jordan"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Jordan"] {
+      color: hsl(162.2, 50%, 50%);
+    }
   
-    #map path[name="Kazakhstan"] {
-      color: hsl(147, 70%, 50%);
+    [data-style="winner"] #map path[name="Kazakhstan"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Kazakhstan"] {
+      color: hsl(185, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Kazakhstan"] {
+      color: hsl(192.1, 50%, 50%);
     }
   
-    #map path[name="Kenya"] {
-      color: hsl(147, 100%, 50%);
+    [data-style="winner"] #map path[name="Kenya"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Kenya"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Kenya"] {
+      color: hsl(169.3, 50%, 50%);
+    }
   
-    #map path[name="Kiribati"] {
-      color: hsl(147, 100%, 50%);
+    [data-style="winner"] #map path[name="Kiribati"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Kiribati"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Kiribati"] {
+      color: hsl(169.3, 50%, 50%);
+    }
   
-    #map path[name="Kuwait"] {
-      color: hsl(147, 60%, 50%);
+    [data-style="winner"] #map path[name="Kuwait"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Kuwait"] {
+      color: hsl(185, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Kuwait"] {
+      color: hsl(199.7, 50%, 50%);
+    }
   
-    #map path[name="Lao PDR"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="Lao PDR"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Lao PDR"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Lao PDR"] {
+      color: hsl(184.5, 50%, 50%);
+    }
   
-    #map path[name="Latvia"] {
-      color: hsl(147, 70%, 50%);
+    [data-style="winner"] #map path[name="Latvia"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Latvia"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Latvia"] {
+      color: hsl(169.8, 50%, 50%);
     }
   
-    #map path[name="Lebanon"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="Lebanon"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Lebanon"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Lebanon"] {
+      color: hsl(184.5, 50%, 50%);
+    }
   
-    #map path[name="Lesotho"] {
-      color: hsl(147, 100%, 50%);
+    [data-style="winner"] #map path[name="Lesotho"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Lesotho"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Lesotho"] {
+      color: hsl(169.3, 50%, 50%);
     }
   
-    #map path[name="Liberia"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Liberia"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Liberia"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Liberia"] {
+      color: hsl(154.6, 50%, 50%);
+    }
   
-    #map path[name="Libya"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Libya"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Libya"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Libya"] {
+      color: hsl(176.9, 50%, 50%);
     }
   
-    #map path[name="Liechtenstein"] {
-      color: hsl(223, 60%, 50%);
+    [data-style="winner"] #map path[name="Liechtenstein"] {
+      color: hsl(223, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Liechtenstein"] {
+      color: hsl(185, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Liechtenstein"] {
+      color: hsl(207.3, 50%, 50%);
+    }
   
-    #map path[name="Lithuania"] {
-      color: hsl(223, 90%, 50%);
+    [data-style="winner"] #map path[name="Lithuania"] {
+      color: hsl(223, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Lithuania"] {
+      color: hsl(223, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Lithuania"] {
+      color: hsl(230.1, 50%, 50%);
     }
   
-    #map path[name="Luxembourg"] {
-      color: hsl(147, 60%, 50%);
+    [data-style="winner"] #map path[name="Luxembourg"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Luxembourg"] {
+      color: hsl(185, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Luxembourg"] {
+      color: hsl(199.7, 50%, 50%);
+    }
   
-    #map path[name="Macau"] {
-      color: hsl(223, 60%, 50%);
+    [data-style="winner"] #map path[name="Macau"] {
+      color: hsl(223, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Macau"] {
+      color: hsl(185, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Macau"] {
+      color: hsl(207.3, 50%, 50%);
+    }
   
-    #map path[name="Macedonia"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="Macedonia"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Macedonia"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Macedonia"] {
+      color: hsl(184.5, 50%, 50%);
+    }
   
-    #map path[name="Madagascar"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Madagascar"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Madagascar"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Madagascar"] {
+      color: hsl(176.9, 50%, 50%);
+    }
   
-    #map path[name="Malawi"] {
-      color: hsl(147, 100%, 50%);
+    [data-style="winner"] #map path[name="Malawi"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Malawi"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Malawi"] {
+      color: hsl(169.3, 50%, 50%);
     }
   
-    #map path[name="Malaysia"] {
-      color: hsl(147, 70%, 50%);
+    [data-style="winner"] #map path[name="Malaysia"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Malaysia"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Malaysia"] {
+      color: hsl(192.1, 50%, 50%);
+    }
   
-    #map path[name="Maldives"] {
-      color: hsl(147, 70%, 50%);
+    [data-style="winner"] #map path[name="Maldives"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Maldives"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Maldives"] {
+      color: hsl(192.1, 50%, 50%);
     }
   
-    #map path[name="Mali"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="Mali"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Mali"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Mali"] {
+      color: hsl(184.5, 50%, 50%);
+    }
   
-    #map path[name="Malta"] {
-      color: hsl(147, 60%, 50%);
+    [data-style="winner"] #map path[name="Malta"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Malta"] {
+      color: hsl(185, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Malta"] {
+      color: hsl(199.7, 50%, 50%);
+    }
   
-    #map path[name="Marshall Islands"] {
-      color: hsl(147, 60%, 50%);
+    [data-style="winner"] #map path[name="Marshall Islands"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Marshall Islands"] {
+      color: hsl(185, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Marshall Islands"] {
+      color: hsl(199.7, 50%, 50%);
+    }
   
-    #map path[name="Martinique"] {
-      color: hsl(147, 60%, 50%);
+    [data-style="winner"] #map path[name="Martinique"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Martinique"] {
+      color: hsl(185, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Martinique"] {
+      color: hsl(199.7, 50%, 50%);
+    }
   
-    #map path[name="Mauritania"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="Mauritania"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Mauritania"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Mauritania"] {
+      color: hsl(184.5, 50%, 50%);
     }
   
-    #map path[name="Mauritius"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="Mauritius"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Mauritius"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Mauritius"] {
+      color: hsl(184.5, 50%, 50%);
+    }
   
-    #map path[name="Mayotte"] {
-      color: hsl(147, 70%, 50%);
+    [data-style="winner"] #map path[name="Mayotte"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Mayotte"] {
+      color: hsl(185, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Mayotte"] {
+      color: hsl(192.1, 50%, 50%);
     }
   
-    #map path[name="Mexico"] {
-      color: hsl(147, 70%, 50%);
+    [data-style="winner"] #map path[name="Mexico"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Mexico"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Mexico"] {
+      color: hsl(192.1, 50%, 50%);
+    }
   
-    #map path[name="Micronesia"] {
-      color: hsl(147, 70%, 50%);
+    [data-style="winner"] #map path[name="Micronesia"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Micronesia"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Micronesia"] {
+      color: hsl(192.1, 50%, 50%);
+    }
   
-    #map path[name="Moldova"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="Moldova"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Moldova"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Moldova"] {
+      color: hsl(184.5, 50%, 50%);
+    }
   
-    #map path[name="Monaco"] {
-      color: hsl(223, 70%, 50%);
+    [data-style="winner"] #map path[name="Monaco"] {
+      color: hsl(223, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Monaco"] {
+      color: hsl(185, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Monaco"] {
+      color: hsl(214.9, 50%, 50%);
+    }
   
-    #map path[name="Mongolia"] {
-      color: hsl(147, 70%, 50%);
+    [data-style="winner"] #map path[name="Mongolia"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Mongolia"] {
+      color: hsl(185, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Mongolia"] {
+      color: hsl(192.1, 50%, 50%);
     }
   
-    #map path[name="Montenegro"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="Montenegro"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Montenegro"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Montenegro"] {
+      color: hsl(184.5, 50%, 50%);
+    }
   
-    #map path[name="Montserrat"] {
-      color: hsl(147, 70%, 50%);
+    [data-style="winner"] #map path[name="Montserrat"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Montserrat"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Montserrat"] {
+      color: hsl(192.1, 50%, 50%);
     }
   
-    #map path[name="Morocco"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Morocco"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Morocco"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Morocco"] {
+      color: hsl(176.9, 50%, 50%);
+    }
   
-    #map path[name="Mozambique"] {
-      color: hsl(147, 100%, 50%);
+    [data-style="winner"] #map path[name="Mozambique"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Mozambique"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Mozambique"] {
+      color: hsl(169.3, 50%, 50%);
+    }
   
-    #map path[name="Myanmar"] {
-      color: hsl(147, 100%, 50%);
+    [data-style="winner"] #map path[name="Myanmar"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Myanmar"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Myanmar"] {
+      color: hsl(169.3, 50%, 50%);
+    }
   
-    #map path[name="Namibia"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Namibia"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Namibia"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Namibia"] {
+      color: hsl(176.9, 50%, 50%);
+    }
   
-    #map path[name="Nauru"] {
-      color: hsl(147, 100%, 50%);
+    [data-style="winner"] #map path[name="Nauru"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Nauru"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Nauru"] {
+      color: hsl(169.3, 50%, 50%);
+    }
   
-    #map path[name="Nepal"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Nepal"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Nepal"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Nepal"] {
+      color: hsl(176.9, 50%, 50%);
+    }
   
-    #map path[name="Netherlands"] {
-      color: hsl(147, 60%, 50%);
+    [data-style="winner"] #map path[name="Netherlands"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Netherlands"] {
+      color: hsl(185, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Netherlands"] {
+      color: hsl(199.7, 50%, 50%);
+    }
   
-    #map path[name="New Caledonia"] {
-      color: hsl(147, 70%, 50%);
+    [data-style="winner"] #map path[name="New Caledonia"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="New Caledonia"] {
+      color: hsl(185, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="New Caledonia"] {
+      color: hsl(192.1, 50%, 50%);
+    }
   
-    #map path[name="New Zealand"] {
-      color: hsl(147, 70%, 50%);
+    [data-style="winner"] #map path[name="New Zealand"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="New Zealand"] {
+      color: hsl(185, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="New Zealand"] {
+      color: hsl(192.1, 50%, 50%);
     }
   
-    #map path[name="Nicaragua"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="Nicaragua"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Nicaragua"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Nicaragua"] {
+      color: hsl(184.5, 50%, 50%);
+    }
   
-    #map path[name="Niger"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Niger"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Niger"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Niger"] {
+      color: hsl(176.9, 50%, 50%);
     }
   
-    #map path[name="Nigeria"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Nigeria"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Nigeria"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Nigeria"] {
+      color: hsl(154.6, 50%, 50%);
+    }
   
-    #map path[name="Niue"] {
-      color: hsl(223, 100%, 50%);
+    [data-style="winner"] #map path[name="Niue"] {
+      color: hsl(223, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Niue"] {
+      color: hsl(223, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Niue"] {
+      color: hsl(237.7, 50%, 50%);
+    }
   
-    #map path[name="Northern Mariana Islands"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="Northern Mariana Islands"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Northern Mariana Islands"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Northern Mariana Islands"] {
+      color: hsl(184.5, 50%, 50%);
+    }
   
-    #map path[name="Norway"] {
-      color: hsl(223, 70%, 50%);
+    [data-style="winner"] #map path[name="Norway"] {
+      color: hsl(223, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Norway"] {
+      color: hsl(223, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Norway"] {
+      color: hsl(214.9, 50%, 50%);
+    }
   
-    #map path[name="Oman"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="Oman"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Oman"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Oman"] {
+      color: hsl(184.5, 50%, 50%);
     }
   
-    #map path[name="Pakistan"] {
-      color: hsl(147, 100%, 50%);
+    [data-style="winner"] #map path[name="Pakistan"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Pakistan"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Pakistan"] {
+      color: hsl(169.3, 50%, 50%);
+    }
   
-    #map path[name="Palau"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="Palau"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Palau"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Palau"] {
+      color: hsl(184.5, 50%, 50%);
     }
   
-    #map path[name="Palestine"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Palestine"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Palestine"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Palestine"] {
+      color: hsl(176.9, 50%, 50%);
+    }
   
-    #map path[name="Panama"] {
-      color: hsl(147, 70%, 50%);
+    [data-style="winner"] #map path[name="Panama"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Panama"] {
+      color: hsl(185, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Panama"] {
+      color: hsl(192.1, 50%, 50%);
     }
   
-    #map path[name="Papua New Guinea"] {
-      color: hsl(147, 100%, 50%);
+    [data-style="winner"] #map path[name="Papua New Guinea"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Papua New Guinea"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Papua New Guinea"] {
+      color: hsl(169.3, 50%, 50%);
+    }
   
-    #map path[name="Paraguay"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Paraguay"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Paraguay"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Paraguay"] {
+      color: hsl(176.9, 50%, 50%);
     }
   
-    #map path[name="Peru"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Peru"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Peru"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Peru"] {
+      color: hsl(176.9, 50%, 50%);
+    }
   
-    #map path[name="Philippines"] {
-      color: hsl(147, 100%, 50%);
+    [data-style="winner"] #map path[name="Philippines"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Philippines"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Philippines"] {
+      color: hsl(169.3, 50%, 50%);
+    }
   
-    #map path[name="Poland"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="Poland"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Poland"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Poland"] {
+      color: hsl(184.5, 50%, 50%);
+    }
   
-    #map path[name="Portugal"] {
-      color: hsl(147, 70%, 50%);
+    [data-style="winner"] #map path[name="Portugal"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Portugal"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Portugal"] {
+      color: hsl(192.1, 50%, 50%);
+    }
   
-    #map path[name="Puerto Rico"] {
-      color: hsl(223, 60%, 50%);
+    [data-style="winner"] #map path[name="Puerto Rico"] {
+      color: hsl(223, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Puerto Rico"] {
+      color: hsl(185, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Puerto Rico"] {
+      color: hsl(207.3, 50%, 50%);
     }
   
-    #map path[name="Qatar"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="Qatar"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Qatar"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Qatar"] {
+      color: hsl(184.5, 50%, 50%);
+    }
   
-    #map path[name="Republic of Korea"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="Republic of Korea"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Republic of Korea"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Republic of Korea"] {
+      color: hsl(184.5, 50%, 50%);
     }
   
-    #map path[name="Reunion"] {
-      color: hsl(147, 60%, 50%);
+    [data-style="winner"] #map path[name="Reunion"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Reunion"] {
+      color: hsl(185, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Reunion"] {
+      color: hsl(199.7, 50%, 50%);
+    }
   
-    #map path[name="Romania"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="Romania"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Romania"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Romania"] {
+      color: hsl(184.5, 50%, 50%);
+    }
   
-    #map path[name="Russian Federation"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="Russian Federation"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Russian Federation"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Russian Federation"] {
+      color: hsl(184.5, 50%, 50%);
+    }
   
-    #map path[name="Rwanda"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Rwanda"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Rwanda"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Rwanda"] {
+      color: hsl(176.9, 50%, 50%);
+    }
   
-    #map path[name="Saint Barthelemy"] {
-      color: hsl(223, 90%, 50%);
+    [data-style="winner"] #map path[name="Saint Barthelemy"] {
+      color: hsl(223, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Saint Barthelemy"] {
+      color: hsl(223, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Saint Barthelemy"] {
+      color: hsl(230.1, 50%, 50%);
+    }
   
-    #map path[name="Saint Kitts and Nevis"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="Saint Kitts and Nevis"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Saint Kitts and Nevis"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Saint Kitts and Nevis"] {
+      color: hsl(184.5, 50%, 50%);
+    }
   
-    #map path[name="Saint Lucia"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="Saint Lucia"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Saint Lucia"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Saint Lucia"] {
+      color: hsl(184.5, 50%, 50%);
+    }
   
-    #map path[name="Saint Martin"] {
-      color: hsl(147, 60%, 50%);
+    [data-style="winner"] #map path[name="Saint Martin"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Saint Martin"] {
+      color: hsl(185, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Saint Martin"] {
+      color: hsl(199.7, 50%, 50%);
+    }
   
-    #map path[name="Saint Pierre and Miquelon"] {
-      color: hsl(223, 100%, 50%);
+    [data-style="winner"] #map path[name="Saint Pierre and Miquelon"] {
+      color: hsl(223, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Saint Pierre and Miquelon"] {
+      color: hsl(223, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Saint Pierre and Miquelon"] {
+      color: hsl(237.7, 50%, 50%);
     }
   
-    #map path[name="Saint Vincent and the Grenadines"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="Saint Vincent and the Grenadines"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Saint Vincent and the Grenadines"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Saint Vincent and the Grenadines"] {
+      color: hsl(184.5, 50%, 50%);
+    }
   
-    #map path[name="Samoa"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="Samoa"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Samoa"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Samoa"] {
+      color: hsl(184.5, 50%, 50%);
     }
   
-    #map path[name="San Marino"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="San Marino"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="San Marino"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="San Marino"] {
+      color: hsl(162.2, 50%, 50%);
+    }
   
-    #map path[name="Sao Tome and Principe"] {
-      color: hsl(147, 100%, 50%);
+    [data-style="winner"] #map path[name="Sao Tome and Principe"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Sao Tome and Principe"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Sao Tome and Principe"] {
+      color: hsl(169.3, 50%, 50%);
+    }
   
-    #map path[name="Saudi Arabia"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="Saudi Arabia"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Saudi Arabia"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Saudi Arabia"] {
+      color: hsl(184.5, 50%, 50%);
+    }
   
-    #map path[name="Senegal"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="Senegal"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Senegal"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Senegal"] {
+      color: hsl(184.5, 50%, 50%);
+    }
   
-    #map path[name="Serbia"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="Serbia"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Serbia"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Serbia"] {
+      color: hsl(184.5, 50%, 50%);
     }
   
-    #map path[name="Seychelles"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Seychelles"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Seychelles"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Seychelles"] {
+      color: hsl(176.9, 50%, 50%);
+    }
   
-    #map path[name="Sierra Leone"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Sierra Leone"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Sierra Leone"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Sierra Leone"] {
+      color: hsl(154.6, 50%, 50%);
     }
   
-    #map path[name="Singapore"] {
-      color: hsl(147, 70%, 50%);
+    [data-style="winner"] #map path[name="Singapore"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Singapore"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Singapore"] {
+      color: hsl(169.8, 50%, 50%);
+    }
   
-    #map path[name="Slovakia"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="Slovakia"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Slovakia"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Slovakia"] {
+      color: hsl(184.5, 50%, 50%);
+    }
   
-    #map path[name="Slovenia"] {
-      color: hsl(147, 70%, 50%);
+    [data-style="winner"] #map path[name="Slovenia"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Slovenia"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Slovenia"] {
+      color: hsl(169.8, 50%, 50%);
+    }
   
-    #map path[name="Solomon Islands"] {
-      color: hsl(147, 100%, 50%);
+    [data-style="winner"] #map path[name="Solomon Islands"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Solomon Islands"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Solomon Islands"] {
+      color: hsl(169.3, 50%, 50%);
+    }
   
-    #map path[name="Somalia"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Somalia"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Somalia"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Somalia"] {
+      color: hsl(176.9, 50%, 50%);
     }
   
-    #map path[name="South Africa"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="South Africa"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="South Africa"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="South Africa"] {
+      color: hsl(176.9, 50%, 50%);
+    }
   
-    #map path[name="South Sudan"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="South Sudan"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="South Sudan"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="South Sudan"] {
+      color: hsl(184.5, 50%, 50%);
     }
   
-    #map path[name="Spain"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="Spain"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Spain"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Spain"] {
+      color: hsl(184.5, 50%, 50%);
+    }
   
-    #map path[name="Sri Lanka"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Sri Lanka"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Sri Lanka"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Sri Lanka"] {
+      color: hsl(176.9, 50%, 50%);
+    }
   
-    #map path[name="Sudan"] {
-      color: hsl(147, 100%, 50%);
+    [data-style="winner"] #map path[name="Sudan"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Sudan"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Sudan"] {
+      color: hsl(169.3, 50%, 50%);
+    }
   
-    #map path[name="Suriname"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="Suriname"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Suriname"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Suriname"] {
+      color: hsl(162.2, 50%, 50%);
+    }
   
-    #map path[name="Swaziland"] {
-      color: hsl(147, 100%, 50%);
+    [data-style="winner"] #map path[name="Swaziland"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Swaziland"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Swaziland"] {
+      color: hsl(169.3, 50%, 50%);
     }
   
-    #map path[name="Sweden"] {
-      color: hsl(223, 70%, 50%);
+    [data-style="winner"] #map path[name="Sweden"] {
+      color: hsl(223, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Sweden"] {
+      color: hsl(185, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Sweden"] {
+      color: hsl(214.9, 50%, 50%);
+    }
   
-    #map path[name="Switzerland"] {
-      color: hsl(223, 60%, 50%);
+    [data-style="winner"] #map path[name="Switzerland"] {
+      color: hsl(223, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Switzerland"] {
+      color: hsl(185, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Switzerland"] {
+      color: hsl(207.3, 50%, 50%);
     }
   
-    #map path[name="Syria"] {
-      color: hsl(147, 100%, 50%);
+    [data-style="winner"] #map path[name="Syria"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Syria"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Syria"] {
+      color: hsl(169.3, 50%, 50%);
+    }
   
-    #map path[name="Taiwan"] {
-      color: hsl(223, 60%, 50%);
+    [data-style="winner"] #map path[name="Taiwan"] {
+      color: hsl(223, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Taiwan"] {
+      color: hsl(185, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Taiwan"] {
+      color: hsl(207.3, 50%, 50%);
     }
   
-    #map path[name="Tajikistan"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Tajikistan"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Tajikistan"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Tajikistan"] {
+      color: hsl(176.9, 50%, 50%);
+    }
   
-    #map path[name="Tanzania"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Tanzania"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Tanzania"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Tanzania"] {
+      color: hsl(154.6, 50%, 50%);
     }
   
-    #map path[name="Thailand"] {
-      color: hsl(147, 70%, 50%);
+    [data-style="winner"] #map path[name="Thailand"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Thailand"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Thailand"] {
+      color: hsl(192.1, 50%, 50%);
+    }
   
-    #map path[name="The Gambia"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="The Gambia"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="The Gambia"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="The Gambia"] {
+      color: hsl(184.5, 50%, 50%);
+    }
   
-    #map path[name="Timor-Leste"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Timor-Leste"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Timor-Leste"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Timor-Leste"] {
+      color: hsl(176.9, 50%, 50%);
+    }
   
-    #map path[name="Togo"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="Togo"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Togo"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Togo"] {
+      color: hsl(184.5, 50%, 50%);
+    }
   
-    #map path[name="Tokelau"] {
-      color: hsl(223, 100%, 50%);
+    [data-style="winner"] #map path[name="Tokelau"] {
+      color: hsl(223, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Tokelau"] {
+      color: hsl(223, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Tokelau"] {
+      color: hsl(237.7, 50%, 50%);
     }
   
-    #map path[name="Tonga"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="Tonga"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Tonga"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Tonga"] {
+      color: hsl(184.5, 50%, 50%);
+    }
   
-    #map path[name="Trinidad and Tobago"] {
-      color: hsl(147, 70%, 50%);
+    [data-style="winner"] #map path[name="Trinidad and Tobago"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Trinidad and Tobago"] {
+      color: hsl(185, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Trinidad and Tobago"] {
+      color: hsl(192.1, 50%, 50%);
     }
   
-    #map path[name="Tunisia"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Tunisia"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Tunisia"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Tunisia"] {
+      color: hsl(176.9, 50%, 50%);
+    }
   
-    #map path[name="Turkey"] {
-      color: hsl(147, 80%, 50%);
+    [data-style="winner"] #map path[name="Turkey"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Turkey"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Turkey"] {
+      color: hsl(184.5, 50%, 50%);
+    }
   
-    #map path[name="Turkmenistan"] {
-      color: hsl(147, 100%, 50%);
+    [data-style="winner"] #map path[name="Turkmenistan"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Turkmenistan"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Turkmenistan"] {
+      color: hsl(169.3, 50%, 50%);
+    }
   
-    #map path[name="Turks and Caicos Islands"] {
-      color: hsl(223, 60%, 50%);
+    [data-style="winner"] #map path[name="Turks and Caicos Islands"] {
+      color: hsl(223, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Turks and Caicos Islands"] {
+      color: hsl(185, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Turks and Caicos Islands"] {
+      color: hsl(207.3, 50%, 50%);
+    }
   
-    #map path[name="Tuvalu"] {
-      color: hsl(147, 100%, 50%);
+    [data-style="winner"] #map path[name="Tuvalu"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Tuvalu"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Tuvalu"] {
+      color: hsl(169.3, 50%, 50%);
+    }
   
-    #map path[name="Uganda"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Uganda"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Uganda"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Uganda"] {
+      color: hsl(154.6, 50%, 50%);
+    }
   
-    #map path[name="Ukraine"] {
-      color: hsl(147, 70%, 50%);
+    [data-style="winner"] #map path[name="Ukraine"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Ukraine"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Ukraine"] {
+      color: hsl(192.1, 50%, 50%);
+    }
   
-    #map path[name="United Arab Emirates"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="United Arab Emirates"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="United Arab Emirates"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="United Arab Emirates"] {
+      color: hsl(176.9, 50%, 50%);
+    }
   
-    #map path[name="United Kingdom"] {
-      color: hsl(223, 60%, 50%);
+    [data-style="winner"] #map path[name="United Kingdom"] {
+      color: hsl(223, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="United Kingdom"] {
+      color: hsl(185, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="United Kingdom"] {
+      color: hsl(207.3, 50%, 50%);
     }
   
-    #map path[name="United States"] {
-      color: hsl(223, 60%, 50%);
+    [data-style="winner"] #map path[name="United States"] {
+      color: hsl(223, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="United States"] {
+      color: hsl(185, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="United States"] {
+      color: hsl(207.3, 50%, 50%);
+    }
   
-    #map path[name="United States Virgin Islands"] {
-      color: hsl(223, 60%, 50%);
+    [data-style="winner"] #map path[name="United States Virgin Islands"] {
+      color: hsl(223, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="United States Virgin Islands"] {
+      color: hsl(185, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="United States Virgin Islands"] {
+      color: hsl(207.3, 50%, 50%);
     }
   
-    #map path[name="Uruguay"] {
-      color: hsl(147, 70%, 50%);
+    [data-style="winner"] #map path[name="Uruguay"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Uruguay"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Uruguay"] {
+      color: hsl(192.1, 50%, 50%);
+    }
   
-    #map path[name="Uzbekistan"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Uzbekistan"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Uzbekistan"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Uzbekistan"] {
+      color: hsl(176.9, 50%, 50%);
+    }
   
-    #map path[name="Vanuatu"] {
-      color: hsl(147, 100%, 50%);
+    [data-style="winner"] #map path[name="Vanuatu"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Vanuatu"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Vanuatu"] {
+      color: hsl(169.3, 50%, 50%);
+    }
   
-    #map path[name="Vatican City"] {
-      color: hsl(223, 60%, 50%);
+    [data-style="winner"] #map path[name="Vatican City"] {
+      color: hsl(223, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Vatican City"] {
+      color: hsl(185, 50%, 50%);
     }
+    [data-style="nuance"] #map path[name="Vatican City"] {
+      color: hsl(207.3, 50%, 50%);
+    }
   
-    #map path[name="Venezuela"] {
-      color: hsl(147, 100%, 50%);
+    [data-style="winner"] #map path[name="Venezuela"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Venezuela"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Venezuela"] {
+      color: hsl(169.3, 50%, 50%);
     }
   
-    #map path[name="Vietnam"] {
-      color: hsl(147, 70%, 50%);
+    [data-style="winner"] #map path[name="Vietnam"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Vietnam"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Vietnam"] {
+      color: hsl(192.1, 50%, 50%);
+    }
   
-    #map path[name="Wallis and Futuna"] {
-      color: hsl(223, 70%, 50%);
+    [data-style="winner"] #map path[name="Wallis and Futuna"] {
+      color: hsl(223, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Wallis and Futuna"] {
+      color: hsl(223, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Wallis and Futuna"] {
+      color: hsl(214.9, 50%, 50%);
     }
   
-    #map path[name="Western Sahara"] {
-      color: hsl(147, 100%, 50%);
+    [data-style="winner"] #map path[name="Western Sahara"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Western Sahara"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Western Sahara"] {
+      color: hsl(147, 50%, 50%);
+    }
   
-    #map path[name="Yemen"] {
-      color: hsl(147, 100%, 50%);
+    [data-style="winner"] #map path[name="Yemen"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Yemen"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Yemen"] {
+      color: hsl(169.3, 50%, 50%);
     }
   
-    #map path[name="Zambia"] {
-      color: hsl(147, 100%, 50%);
+    [data-style="winner"] #map path[name="Zambia"] {
+      color: hsl(147, 50%, 50%);
     }
+    [data-style="thirds"] #map path[name="Zambia"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Zambia"] {
+      color: hsl(169.3, 50%, 50%);
+    }
   
-    #map path[name="Zimbabwe"] {
-      color: hsl(147, 90%, 50%);
+    [data-style="winner"] #map path[name="Zimbabwe"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="thirds"] #map path[name="Zimbabwe"] {
+      color: hsl(147, 50%, 50%);
+    }
+    [data-style="nuance"] #map path[name="Zimbabwe"] {
+      color: hsl(176.9, 50%, 50%);
     }
   
 

@@ -6,12 +6,13 @@
     <title>Data Maps</title>
     {% include 'style.njk' %}
   </head>
-  <body>
+  <body data-style="winner">
     <header>
       <p><strong>Data Maps</strong></p>
     </header>
     <main class="flow">
       <h1>Apple/Android Split by country</h1>
+      {% include 'form.njk' %}
       {% include 'map.njk' %}
       <table>
         <tr>
